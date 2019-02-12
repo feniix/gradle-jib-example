@@ -12,8 +12,10 @@ plugins {
 }
 
 allprojects {
-  sourceCompatibility = 1.8
-  targetCompatibility = 1.8
+  tasks.withType(JavaCompile) {
+    sourceCompatibility = "1.8"
+    targetCompatibility = "1.8"
+  }
 }
 
 def mainClass = 'com.example.Runner'
