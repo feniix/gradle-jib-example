@@ -8,23 +8,40 @@
 plugins {
   id 'java'
   id 'application'
+  id "com.google.cloud.tools.jib" version "1.0.0"
 }
 
-def mainclass = 'com.example.Runner'
+def mainClass = 'com.example.Runner'
 
 application {
-  mainClassName = mainclass
+  mainClassName = mainClass
 }
 
 jar {
   manifest {
     attributes(
-      'Main-Class': mainclass
+      'Main-Class': mainClass
     )
   }
 }
 
+dependencies {
+  implementation project('lib')
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.0'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.0'
+}
+
 repositories {
   jcenter()
+}
+
+jib {
+  from {
+    image = 'openjdk:8-alpine'
+  }
+  to.image = 'myimage' // the `jib` task will attempt to do a docker push so we cannot use just any name, but the name corresponding to a
+  container {
+    mainClass = mainClass
+  }
 }
 
