@@ -1,0 +1,21 @@
+dist: xenial
+
+language: java
+
+services:
+  - docker
+
+
+addons:
+  apt:
+    packages:
+      - openjdk-8-jdk
+
+script:
+  - ./gradlew build
+  - ./gradlew test
+  - ./gradlew run
+  - ./gradlew jibBuildTar
+  - ./gradlew jibDockerBuild
+  - docker run -it --rm myimage
+
