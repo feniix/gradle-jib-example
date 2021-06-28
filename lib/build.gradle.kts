@@ -6,23 +6,23 @@
  */
 
 plugins {
-  id 'java-library'
+  id("java-library")
 }
 
 dependencies {
-  testImplementation 'org.junit.platform:junit-platform-runner:1.4.0'
-  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.0'
-  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.0'
+  testImplementation("org.junit.platform:junit-platform-runner:1.4.0")
+  testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.0")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.4.0")
 }
 
 repositories {
   jcenter()
 }
 
-test {
+tasks.withType<Test> {
   useJUnitPlatform()
   testLogging {
-    events 'PASSED', 'FAILED', 'SKIPPED'
+    events("PASSED", "FAILED", "SKIPPED")
   }
 }
 
